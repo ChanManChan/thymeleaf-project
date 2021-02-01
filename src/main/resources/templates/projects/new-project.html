@@ -12,6 +12,10 @@
                 <option th:value="COMPLETED">Completed</option>
             </select>
             <textarea cols="30" rows="10" placeholder="Enter project description" th:field="${project.description}"></textarea>
+            <!-- * is used to refer to a property inside the parent object -->
+            <select th:field="*{employees}" multiple="multiple">
+                <option th:each="employee : ${allEmployees}" th:value="${employee.employeeId}" th:text="${employee.firstName}"></option>
+            </select>
             <button type="submit">Create Project</button>
         </form>
     </div>
