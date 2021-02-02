@@ -2,13 +2,14 @@ package com.u4.projectmanagement.entities;
 
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 public class Project {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long projectId;
 
     private String name;
@@ -72,5 +73,12 @@ public class Project {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public void addEmployee(Employee emp) {
+        if(employees == null) {
+            employees = new ArrayList<>();
+        }
+        employees.add(emp);
     }
 }
