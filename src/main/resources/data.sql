@@ -1,5 +1,6 @@
--- INSERT EMPLOYEES			
-insert into employee (employee_id, first_name, last_name, email) values (1, 'John', 'Warton', 'warton@gmail.com');
+
+-- INSERT EMPLOYEES
+insert into employee (employee_id, first_name, last_name, email) values (nextval('employee_seq'), 'John', 'Warton', 'warton@gmail.com');
 insert into employee (employee_id, first_name, last_name, email) values (2, 'Mike', 'Lanister', 'lanister@gmail.com');
 insert into employee (employee_id, first_name, last_name, email) values (3, 'Steve', 'Reeves', 'Reeves@gmail.com');
 insert into employee (employee_id, first_name, last_name, email) values (4, 'Ronald', 'Connor', 'connor@gmail.com');
@@ -9,7 +10,7 @@ insert into employee (employee_id, first_name, last_name, email) values (7, 'Ric
 insert into employee (employee_id, first_name, last_name, email) values (8, 'Honor', 'Miles', 'miles@gmail.com');
 insert into employee (employee_id, first_name, last_name, email) values (9, 'Tony', 'Roggers', 'roggers@gmail.com');
 
--- INSERT PROJECTS			
+-- INSERT PROJECTS
 insert into project (project_id, name, stage, description) values (1000, 'Large Production Deploy', 'NOT_STARTED', 'This requires all hands on deck for the final deployment of the software into production');
 insert into project (project_id, name, stage, description) values (1001, 'New Employee Budget',  'COMPLETED', 'Decide on a new employee bonus budget for the year and figureout who will be promoted');
 insert into project (project_id, name, stage, description) values (1002, 'Office Reconstruction', 'IN_PROGRESS', 'The office building in Monroe has been damaged due to hurricane in the region. This needs to be reconstructed');
@@ -22,4 +23,3 @@ insert into project_employee (employee_id, project_id) values (1,1002);
 insert into project_employee (employee_id, project_id) values (3,1000);
 insert into project_employee (employee_id, project_id) values (6,1002);
 insert into project_employee (employee_id, project_id) values (6,1003);
-													

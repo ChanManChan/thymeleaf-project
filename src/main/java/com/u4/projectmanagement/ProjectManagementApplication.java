@@ -4,6 +4,10 @@ import com.u4.projectmanagement.dao.EmployeeRepository;
 import com.u4.projectmanagement.dao.ProjectRepository;
 import com.u4.projectmanagement.entities.Employee;
 import com.u4.projectmanagement.entities.Project;
+import com.u4.projectmanagement.example.Car;
+import com.u4.projectmanagement.example.Doors;
+import com.u4.projectmanagement.example.Engine;
+import com.u4.projectmanagement.example.Tires;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -12,7 +16,7 @@ import org.springframework.context.annotation.Bean;
 
 import java.util.Arrays;
 
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = {"com.u4.projectmanagement", "com.u4.utils"})
 public class ProjectManagementApplication {
 
 	@Autowired
@@ -24,6 +28,15 @@ public class ProjectManagementApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(ProjectManagementApplication.class, args);
 	}
+
+//	@Bean [or] configuration class
+//	public Car newCar() {
+//		Engine e = new Engine();
+//		Doors d = new Doors();
+//		Tires t = new Tires();
+//
+//		return new Car(e, d, t);
+//	}
 
 //	@Bean
 //	CommandLineRunner runner() {
