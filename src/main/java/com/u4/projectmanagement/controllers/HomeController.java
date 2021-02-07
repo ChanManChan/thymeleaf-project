@@ -2,12 +2,12 @@ package com.u4.projectmanagement.controllers;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.u4.projectmanagement.dao.EmployeeRepository;
-import com.u4.projectmanagement.dao.ProjectRepository;
 import com.u4.projectmanagement.dto.EmployeeProject;
 import com.u4.projectmanagement.dto.ProjectsStatus;
 import com.u4.projectmanagement.entities.Project;
 import com.u4.projectmanagement.example.Car;
+import com.u4.projectmanagement.services.EmployeeService;
+import com.u4.projectmanagement.services.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -40,19 +40,19 @@ public class HomeController {
     }
 
     @Autowired
-    ProjectRepository projectRepository;
+    ProjectService projectService;
 
     @Autowired
-    EmployeeRepository employeeRepository;
+    EmployeeService employeeService;
 
     @GetMapping("/")
     public String displayHome(Model model) throws JsonProcessingException {
         Map<String, Object> map = new HashMap<>();
         ObjectMapper objectMapper = new ObjectMapper();
 
-        List<Project> projects = projectRepository.findAll();
-        List<EmployeeProject> employeesProjectCount = employeeRepository.employeeProjects();
-        List<ProjectsStatus> projectsStatuses = projectRepository.projectsStatus();
+        List<Project> projects = projectService.getAll();
+        List<EmployeeProject> employeesProjectCount = employeeService.employeeProjects();
+        List<ProjectsStatus> projectsStatuses = projectService.getProjectStatus();
 
         String jsonString = objectMapper.writeValueAsString(projectsStatuses);
 

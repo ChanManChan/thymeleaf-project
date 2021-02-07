@@ -2,11 +2,15 @@ package com.u4.projectmanagement.dao;
 
 import com.u4.projectmanagement.dto.EmployeeProject;
 import com.u4.projectmanagement.entities.Employee;
+import org.springframework.context.annotation.Profile;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
+//@Profile("prod")
 public interface EmployeeRepository extends CrudRepository<Employee, Long> {
     @Override
     public List<Employee> findAll();

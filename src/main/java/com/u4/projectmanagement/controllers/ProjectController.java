@@ -4,6 +4,8 @@ import com.u4.projectmanagement.dao.EmployeeRepository;
 import com.u4.projectmanagement.dao.ProjectRepository;
 import com.u4.projectmanagement.entities.Employee;
 import com.u4.projectmanagement.entities.Project;
+import com.u4.projectmanagement.services.EmployeeService;
+import com.u4.projectmanagement.services.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,14 +21,14 @@ import java.util.List;
 public class ProjectController {
 
     @Autowired
-    ProjectRepository projectRepository;
+    ProjectService projectService;
 
     @Autowired
-    EmployeeRepository employeeRepository;
+    EmployeeService employeeService;
 
     @GetMapping
     public String displayProjects(Model model) {
-        List<Project> projects = projectRepository.findAll();
+        List<Project> projects = projectService.getAll();
 
         model.addAttribute("projects", projects);
 
@@ -36,7 +38,7 @@ public class ProjectController {
     @GetMapping("/new")
     public String displayProjectForm(Model model) {
         Project aProject = new Project();
-        List<Employee> employees = employeeRepository.findAll();
+        List<Employee> employees = employeeService.getAll();
 
         model.addAttribute("project", aProject);
         model.addAttribute("allEmployees", employees);
@@ -45,7 +47,7 @@ public class ProjectController {
 
     @PostMapping("/save")
     public String createProjectForm(Project project, @RequestParam List<Long> employees, Model model) {
-        projectRepository.save(project);
+        projectService.save(project);
 
         // this is for @ManyToOne (many employees to one project) relationship only
         // Iterable<Employee> chosenEmployees = employeeRepository.findAllById(employees);
