@@ -3,6 +3,9 @@ package com.u4.projectmanagement.dao;
 import com.u4.projectmanagement.dto.EmployeeProject;
 import com.u4.projectmanagement.entities.Employee;
 import org.springframework.context.annotation.Profile;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
 
 import java.util.Arrays;
@@ -91,5 +94,25 @@ public class EmployeeRepository2 implements EmployeeRepository {
         };
 
         return Arrays.asList(employeeProject);
+    }
+
+    @Override
+    public Employee findByEmail(String value) {
+        return null;
+    }
+
+    @Override
+    public Employee findByEmployeeId(long empId) {
+        return null;
+    }
+
+    @Override
+    public Iterable<Employee> findAll(Sort sort) {
+        return null;
+    }
+
+    @Override
+    public Page<Employee> findAll(Pageable pageable) {
+        return null;
     }
 }

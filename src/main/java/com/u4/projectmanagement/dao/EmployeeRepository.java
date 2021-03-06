@@ -5,13 +5,15 @@ import com.u4.projectmanagement.entities.Employee;
 import org.springframework.context.annotation.Profile;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository
 //@Profile("prod")
-public interface EmployeeRepository extends CrudRepository<Employee, Long> {
+@RepositoryRestResource(collectionResourceRel = "api-employees", path = "api-employees")
+public interface EmployeeRepository extends PagingAndSortingRepository<Employee, Long> {
     @Override
     public List<Employee> findAll();
 
@@ -22,4 +24,8 @@ public interface EmployeeRepository extends CrudRepository<Employee, Long> {
                     " group by e.first_name, e.last_name order by 3 desc"
     )
     public List<EmployeeProject> employeeProjects();
+
+    public Employee findByEmail(String value);
+
+    public Employee findByEmployeeId(long empId);
 }

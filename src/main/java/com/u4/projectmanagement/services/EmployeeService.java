@@ -48,4 +48,12 @@ public class EmployeeService {
     public List<EmployeeProject> employeeProjects() {
         return employeeRepository.employeeProjects();
     }
+
+    public Employee findByEmployeeId(long empId) {
+        return employeeRepository.findByEmployeeId(empId);
+    }
+
+    public void delete(Employee employee) {
+        employeeRepository.delete(employee);
+    }
 }
