@@ -2,6 +2,7 @@ package com.u4.projectmanagement.services;
 
 import com.u4.projectmanagement.dao.ProjectRepository;
 import com.u4.projectmanagement.dto.ProjectsStatus;
+import com.u4.projectmanagement.dto.TimeChartData;
 import com.u4.projectmanagement.entities.Project;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,5 +25,9 @@ public class ProjectService {
 
     public List<ProjectsStatus> getProjectStatus() {
         return projectRepository.projectsStatus();
+    }
+
+    public List<TimeChartData> getTimeData() {
+        return projectRepository.getTimeData();
     }
 }

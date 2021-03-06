@@ -1,7 +1,10 @@
 package com.u4.projectmanagement.controllers;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.u4.projectmanagement.dao.EmployeeRepository;
 import com.u4.projectmanagement.dao.ProjectRepository;
+import com.u4.projectmanagement.dto.TimeChartData;
 import com.u4.projectmanagement.entities.Employee;
 import com.u4.projectmanagement.entities.Project;
 import com.u4.projectmanagement.services.EmployeeService;
@@ -58,5 +61,19 @@ public class ProjectController {
         // }
 
         return "redirect:/projects/new";
+    }
+
+    @GetMapping("/timelines")
+    public String displayProjectTimelines(Model model) throws JsonProcessingException {
+        List<TimeChartData> timelineData = projectService.getTimeData();
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        String jsonTimelineString = objectMapper.writeValueAsString(timelineData);
+
+        System.out.println("------------Project Timeline------------");
+        System.out.println(jsonTimelineString);
+
+        model.addAttribute("projectTimeList", jsonTimelineString);
+        return "projects/project-timelines";
     }
 }

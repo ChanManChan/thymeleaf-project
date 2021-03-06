@@ -8,11 +8,29 @@
 <!--            This will be used to bind to the employee that was clicked on (Used for updates)
                  without this hidden input field, it will insert a new employee -->
             <input type="hidden" th:field="${employee.employeeId}">
-            <input type="text" placeholder="First Name" th:field="${employee.firstName}">
-            <input type="text" placeholder="Last Name" th:field="${employee.lastName}">
-            <input type="email" placeholder="email" th:field="${employee.email}">
+            <div class="form-group row mb-3">
+                <input type="text" placeholder="First Name" th:field="${employee.firstName}">
+                <br>
+                <span class="text-danger" th:if="${#fields.hasErrors('firstName')}"
+                      th:errors="${employee.firstName}">
+                </span>
+            </div>
+            <div class="form-group row mb-3">
+                <input type="text" placeholder="Last Name" th:field="${employee.lastName}">
+                <br>
+                <span class="text-danger" th:if="${#fields.hasErrors('lastName')}"
+                      th:errors="${employee.lastName}">
+                </span>
+            </div>
+            <div class="form-group row mb-3">
+                <input type="email" placeholder="email" th:field="${employee.email}">
+                <br>
+                <span class="text-danger" th:if="${#fields.hasErrors('email')}"
+                      th:errors="${employee.email}">
+                </span>
+            </div>
 <!--            <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>-->
-            <button type="submit">Create Employee</button>
+            <button type="submit" class="btn btn-info">Create Employee</button>
         </form>
     </div>
 </body>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="layouts::header"></head>
+    <nav th:replace="layouts::navbar"></nav>
+    <body>
+        <h2 class="text-center">Project Timelines</h2>
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        <script type="text/javascript">
+              const chartData = "[[${projectTimeList}]]"
+              const chartDataDecoded = decodeHtml(chartData)
+              const chartJsonArray = JSON.parse(chartDataDecoded)
+              const resultArray = []
+
+              for(let i in chartJsonArray) {
+                resultArray.push(chartJsonArray[i])
+              }
+
+              console.log('RESULT ARRAY: ', resultArray)
+
+              google.charts.load('current', {'packages':['timeline']});
+              google.charts.setOnLoadCallback(drawChart);
+
+              function drawChart() {
+                var container = document.getElementById('timeline');
+                var chart = new google.visualization.Timeline(container);
+                var dataTable = new google.visualization.DataTable();
+
+                dataTable.addColumn({ type: 'string', id: 'Project' });
+                dataTable.addColumn({ type: 'date', id: 'Start' });
+                dataTable.addColumn({ type: 'date', id: 'End' });
+
+                const data2D = []
+
+                for(let j = 0; j < resultArray.length; j++) {
+                    data2D.push([
+                        resultArray[j]["projectName"],
+                        new Date(resultArray[j]["startDate"]),
+                        new Date(resultArray[j]["endDate"])
+                    ])
+                }
+
+                dataTable.addRows(data2D);
+                chart.draw(dataTable);
+              }
+
+              function decodeHtml(html) {
+                const text = document.createElement("textarea")
+                text.innerHTML = html
+                return text.value
+              }
+        </script>
+        <div id="timeline" style="height: 580px;"></div>
+    </body>
+</html>

@@ -4,7 +4,9 @@ package com.u4.projectmanagement.entities;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -21,6 +23,12 @@ public class Project {
     private String stage; // NOT_STARTED, COMPLETED, IN_PROGRESS
 
     private String description;
+
+    @NotBlank(message = "date cannot be empty")
+    private Date startDate;
+
+    @NotBlank(message = "date cannot be empty")
+    private Date endDate;
 
     @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.PERSIST}, fetch = FetchType.LAZY)
     @JoinTable(
@@ -85,5 +93,21 @@ public class Project {
             employees = new ArrayList<>();
         }
         employees.add(emp);
+    }
+
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
+
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
     }
 }
